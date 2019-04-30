@@ -39,6 +39,10 @@ resource "azurerm_kubernetes_cluster" "myAKSCluster" {
     client_secret = "FC0WPeAw7SZmkosj9GK9EBFQCsYwN54LHuk/FCbkrbA="
   }
 }
+resource "local_file" "kubeconfig" {
+  content  = "${azurerm_kubernetes_cluster.myAKSCluster.kube_admin_config_raw}"
+  filename = "${path.module}/kubeconfig"
+}
 variable "nameregion" {
   default = "West US"
 }
